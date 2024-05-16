@@ -1,11 +1,8 @@
-const canvas = document.querySelector(".canvas");
 const stackBundle = document.querySelectorAll(".exp");
 
 stackBundle.forEach((target) => {
   target.addEventListener("click", clickExp);
 });
-
-canvas.addEventListener("click", clickCanvas);
 
 const desc = {
   first: {
@@ -62,24 +59,36 @@ const desc = {
 };
 
 const keys = ["subject", "content", "stack", "team", "period"];
+let isClicked = {
+  first: false,
+  second: false,
+  third: false,
+  fourth: false,
+  fifth: false,
+};
 
 function clickExp({ target }) {
-  canvas.classList.remove("hidden");
+  const clicked = document.getElementById(target.id);
+  if (!clicked) return;
 
-  const stack = document.createElement("div");
+  isClicked[target.id] = !isClicked[target.id];
 
-  keys.forEach((key) => {
-    const subContext = document.createElement("div");
+  const canvas = document.getElementById(`c-${target.id}`);
 
-    subContext.className = key;
-    subContext.innerText = desc[target.id][key];
+  if (!isClicked[target.id]) {
+    canvas.className = "hidden";
+    canvas.replaceChildren();
+  } else {
+    keys.forEach((key) => {
+      canvas.className = "canvas";
+      const subContext = document.createElement("div");
 
-    stack.appendChild(subContext);
-  });
+      subContext.className = key;
+      subContext.innerText = desc[target.id][key];
 
-  canvas.replaceChildren(stack);
-}
+      canvas.appendChild(subContext);
+    });
 
-function clickCanvas() {
-  canvas.classList.add("hidden");
+    clicked.appendChild(canvas);
+  }
 }
