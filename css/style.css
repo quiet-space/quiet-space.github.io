@@ -146,7 +146,7 @@ section {
 
   .bubbles {
     width: 100vw;
-    height: fit-content;
+    height: 100vh;
 
     margin-top: 10%;
     margin-right: 2%;
@@ -171,16 +171,13 @@ section {
     }
 
     .slide {
+      height: 70%;
+
       overflow-y: hidden;
 
-      padding-top: 20%;
-
-      height: 100vh;
-      max-height: 100vh;
-
       .empty {
+        margin: auto;
         text-align: center;
-
         font-family: "Outfit", sans-serif;
         font-weight: 200;
         font-size: 15vw;
